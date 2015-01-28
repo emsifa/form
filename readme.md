@@ -207,6 +207,20 @@ $builder->select('birth_year')->addOption('1', 1990);
 //   <option value="3" selected>1992</option>
 // </select>
 $builder->select('birth_year', ['1' => 1990, '2' => 1991, '3' => 1992])->select('3');
+
+// <select name="fruits" multiple="multiple">
+//   <option value="1">Apple</option>
+//   <option value="2">Orange</option>
+//   <option value="3">Blueberry</option>
+// </select>
+$builder->select('fruits', ['1' => 'Apple', '2' => 'Orange', '3' => 'Blueberry'])->multiple();
+
+// <select name="fruits" multiple="multiple">
+//   <option value="1">Apple</option>
+//   <option value="2" selected>Orange</option>
+//   <option value="3" selected>Blueberry</option>
+// </select>
+$builder->select('fruits', ['1' => 'Apple', '2' => 'Orange', '3' => 'Blueberry'])->multiple()->select(['2','3']);
 ```
 
 <a href="#buttons"></a>

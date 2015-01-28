@@ -184,4 +184,25 @@ class SelectTest extends PHPUnit_Framework_TestCase
 
 		$this->assertEquals($expected, $result);
 	}
+
+	public function testCanUseMultipleSelect()
+	{
+	        $select = new Select('color');
+		$select->options(array('red' => 'Red', 'blue' => 'Blue', 'green' => 'Green'));
+		$expected = '<select name="color" multiple="multiple"><option value="red">Red</option><option value="blue">Blue</option><option value="green">Green</option></select>';
+		$result = $select->multiple()->render();
+
+		$this->assertEquals($expected, $result);
+	}
+
+	public function testCanSetMultipleSelectedOptions()
+	{
+		$select = new Select('color');
+		$select->options(array('red' => 'Red', 'blue' => 'Blue', 'green' => 'Green'));
+		$expected = '<select name="color" multiple="multiple"><option value="red" selected>Red</option><option value="blue">Blue</option><option value="green" selected>Green</option></select>';
+		$result = $select->multiple()->select(['red', 'green'])->render();
+
+		$this->assertEquals($expected, $result);
+	}
+
 }

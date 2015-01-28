@@ -3,7 +3,7 @@
 class Select extends FormControl
 {
     private $options;
-    private $selected;
+    private $selected = array();
 
     public function __construct($name, $options = array())
     {
@@ -13,7 +13,7 @@ class Select extends FormControl
 
     public function select($option)
     {
-        $this->selected = $option;
+        $this->selected = (array) $option;
         return $this;
     }
 
@@ -25,6 +25,12 @@ class Select extends FormControl
     public function options($options)
     {
         $this->setOptions($options);
+        return $this;
+    }
+
+    public function multiple()
+    {
+        $this->setAttribute('multiple', 'multiple');
         return $this;
     }
 
@@ -77,7 +83,7 @@ class Select extends FormControl
 
     protected function isSelected($value)
     {
-        return isset($this->selected) ? $this->selected == $value : false;
+        return in_array($value, $this->selected);
     }
 
     public function addOption($value, $label)
@@ -88,7 +94,7 @@ class Select extends FormControl
 
     public function defaultValue($value)
     {
-        if (isset($this->selected)) {
+        if ( ! empty($this->selected)) {
             return $this;
         }
 
